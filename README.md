@@ -3,7 +3,7 @@
 # _How to use it:_
 
 
-# _About the problem:_
+## _About the problem:_
 
 
 # _Our solution:_
