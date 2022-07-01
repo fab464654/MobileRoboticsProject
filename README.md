@@ -10,7 +10,7 @@
 
 
 
-![Main page](lidarReadings_MAP_CENTER.json.png)
+![Main page/github_images](lidarReadings_MAP_CENTER.json.png)
 ![Main page](Multiline_plot1.png)
 ![Main page](Multiline_plot2.png)
 
