@@ -1,12 +1,12 @@
 # MobileRoboticsProject
 
-# _How to use it:_
+## _How to use it:_
 
 
 ## _About the problem:_
 
 
-# _Our solution:_
+## _Our solution:_
 
 
 
