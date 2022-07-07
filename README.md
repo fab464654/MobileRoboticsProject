@@ -114,7 +114,7 @@ Some other problems that arise on the real robot are worth mentioning:
 This project aims at implementing a robust algorithm to perfectly align to the right/left wall and then go straight until another wall is reached or until a key is pressed (switching to the "Rotate 180 deg" state). This behaviour wasn't achieved by the starting algorithm developed during the lab sessions, as can be clearly seen from the following video (Rviz2 + Unity visualization; the colors of the LIDAR readings match the previously shown regions).
 
 <p align="center">
-  <img src="github_images/rewind_lab_align_right.gif" alt="rewind LAB align right" width="500"/>
+  <img src="github_images/rewind_lab_align_right.gif" alt="rewind LAB align right" width="550"/>
 </p>
 
 
