@@ -108,14 +108,22 @@ In the following image, the implemented Finite State Machine is shown. The algor
 </p>
 
 <p align="center">
-  <img src="github_images/align_right.gif" alt="Align right" width="600"/>
-
+  <img src="github_images/align_right.gif" alt="Align right" width="200"/>
+  <img src="github_images/align_right_rviz.gif" alt="Align right RVIZ" width="200"/>
 </p>
 
-![Align left](github_images/align_left.gif)
-![Align right](github_images/align_left_rviz.gif)
+<p align="center">
+  <img src="github_images/align_left.gif" alt="Align right" width="200"/>
+  <img src="github_images/align_left_rviz.gif" alt="Align right RVIZ" width="200"/>
+</p>
 
-![LIDAR readings](github_images/lidarReadings_MAP_CENTER.json.png)
-![RANSAC 1](github_images/Multiline_plot1.png)
-![RANSAC 2](github_images/Multiline_plot2.png)
+
+<p align="center">
+  <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="300"/>
+</p>
+
+<p align="center">
+  <img src="github_images/Multiline_plot1.png" alt="Multiline_plot1" width="200"/>
+  <img src="github_images/Multiline_plot2.png" alt="Multiline_plot1" width="200"/>
+</p>
 
