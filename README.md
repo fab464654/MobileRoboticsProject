@@ -14,6 +14,7 @@ colcon build && . install/setup.bash
 Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
 ### _SUGGESTED TUNABLE VALUES FOR SIMULATION:_
+```sh
 - distance_threshold = 0.15   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
@@ -24,7 +25,8 @@ Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choos
 - sigma = 0.005                # standard deviation of the optional added white noise 
 - K_P = 1                     # controller P term 
 - align_max_ang_vel = 0.5     # [rad/s] < 1.82! Maximum angular velocity in 'align left/right' state (saturation) 
-    
+```
+ 
 Build and source the workspace
 
 
@@ -46,6 +48,7 @@ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction
 Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
 ### _SUGGESTED TUNABLE VALUES FOR REAL ROBOT:_
+```sh
 - distance_threshold = 0.25   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
@@ -56,7 +59,7 @@ Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choos
 - sigma = 0.005               # standard deviation of the optional added white noise (NOT USED)
 - K_P = 1                     # controller P term 
 - align_max_ang_vel = 0.5     # [rad/s] < 1.82! Maximum angular velocity in 'align left/right' state (saturation) 
-    
+```  
 Build and source the workspace
 
 
