@@ -101,7 +101,7 @@ In the following image, the implemented Finite State Machine is shown. The algor
 
 ## _Our solution:_
 
-<img src="github_images/fsm.png" alt="FSM" width="600" align="middle"/>
+<img src="github_images/fsm.png" alt="FSM" width="600" align="center"/>
 
 ![Align right](github_images/align_right.gif)
 ![Align right](github_images/align_right_rviz.gif)
