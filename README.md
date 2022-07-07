@@ -100,12 +100,13 @@ The aim of this project was implementing a robust method for moving precisely al
 
 
 In the following image, the implemented Finite State Machine is shown. The algorithm has the ability to perform alignment towards left or right. Also, when a key is pressed during the execution, the robot will turn by 180° ("Rotate 180°" state) and enter the "Rewind" state. This state makes the robot "going back" re-running a certain number of linear/angular velocities according to the values stored in a deque stack.
+<p align="center">
+  <img src="github_images/fsm.png" alt="FSM" width="500"/>
+</p>
 
 ## _Our solution:_
 
-<p align="center">
-  <img src="github_images/fsm.png" alt="FSM" width="600"/>
-</p>
+
 
 <p align="center">
   <img src="github_images/align_right.gif" alt="Align right" width="400"/>
