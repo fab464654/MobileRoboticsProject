@@ -13,7 +13,7 @@ colcon build && . install/setup.bash
 ## _To tune the code (optional):_
 > Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
-# - - - - - - - - - - - - - - - - - - SUGGESTED TUNABLE VALUES FOR SIMULATION - - - - - - - - - - - - - - - - - - - - - - - - #
+> _SUGGESTED TUNABLE VALUES FOR SIMULATION:_
 - distance_threshold = 0.15   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
@@ -45,7 +45,7 @@ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction
 ## _To tune the code (optional):_
 > Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
-# - - - - - - - - - - - - - - - - - - SUGGESTED TUNABLE VALUES FOR SIMULATION - - - - - - - - - - - - - - - - - - - - - - - - #
+> _SUGGESTED TUNABLE VALUES FOR REAL ROBOT:_
 - distance_threshold = 0.25   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
