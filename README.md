@@ -96,6 +96,7 @@ The aim of this project was implementing a robust method for moving precisely al
 
 <p align="center">
   <img src="github_images/regions.jpg" alt="regions" width="400"/>
+  <img src="github_images/robot.gif" alt="turtlebot" width="400"/>
 </p>
 
 
