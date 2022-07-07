@@ -111,7 +111,14 @@ Some other problems that arise on the real robot are worth mentioning:
 - even if the "arena" that we build to contain the robot is taller than the robot itself, several readings refer to outside the walls. In particular, we suppose that this low-cost sensor points the laser "on an angle" with respect to the ground. In fact, the closest measurements are pretty reliable while the distant ones refer to outside the built arena.
 
 ## _Our solution:_
-The main idea 
+This project aims at implementing a robust algorithm to perfectly align to the right/left wall and then go straight until another wall is reached or until a key is pressed (switching to the "Rotate 180 deg" state). This behaviour wasn't achieved by the starting algorithm developed during the lab sessions, as can be clearly seen from the following video (Rviz2 + Unity visualization; the colors of the LIDAR readings match the previously shown regions).
+
+<p align="center">
+  <img src="github_images/rewind_lab_align_right.gif" alt="rewind LAB align right" width="500"/>
+</p>
+
+
+
 #### Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right
 <p align="center">
   <img src="github_images/align_right.gif" alt="Align right" width="400"/>
