@@ -120,7 +120,7 @@ In the following image, the implemented Finite State Machine is shown. The algor
 
 
 <p align="center">
-  <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="600"/>
+  <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="300"/>
 </p>
 
 <p align="center">
