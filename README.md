@@ -12,8 +12,7 @@ In the following image, the implemented Finite State Machine is shown. The algor
 
 ## _Our solution:_
 
-![FSM](github_images/fsm.png)
-<img src="github_images/fsm.png" alt="drawing" width="200"/>
+<img src="github_images/fsm.png" alt="FSM" width="600"/>
 
 ![Align right](github_images/align_right.gif)
 ![Align left](github_images/align_left.gif)
