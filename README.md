@@ -22,7 +22,7 @@ Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choos
 - ransac_threshold = 0.001    # distance under which a point gives its consensus to a line 
 - ransac_iterations = 200     # number of iterations of RANSAC algorithm  
 - add_noise = True            # choose whether to add white noise to lidar readings 
-- sigma = 0.005                # standard deviation of the optional added white noise 
+- sigma = 0.005               # standard deviation of the optional added white noise 
 - K_P = 1                     # controller P term 
 - align_max_ang_vel = 0.5     # [rad/s] < 1.82! Maximum angular velocity in 'align left/right' state (saturation) 
 ```
