@@ -15,6 +15,8 @@ In the following image, the implemented Finite State Machine is shown. The algor
 <img src="github_images/fsm.png" alt="FSM" width="600"/>
 
 ![Align right](github_images/align_right.gif)
+![Align right](github_images/align_right_rviz.gif)
+
 ![Align left](github_images/align_left.gif)
 
 ![LIDAR readings](github_images/lidarReadings_MAP_CENTER.json.png)
