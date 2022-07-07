@@ -106,19 +106,18 @@ In the following image, the implemented Finite State Machine is shown. The algor
 
 ## _Our solution:_
 
-
+#### Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right
 <p align="center">
   <img src="github_images/align_right.gif" alt="Align right" width="400"/>
   <img src="github_images/align_right_rviz.gif" alt="Align right RVIZ" width="400"/>
 </p>
-Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right
 
-
+#### Align "Left" argument; Real robot on the left and real-time Rviz2 visualization on the right
 <p align="center">
   <img src="github_images/align_left.gif" alt="Align right" width="400"/>
   <img src="github_images/align_left_rviz.gif" alt="Align right RVIZ" width="400"/>
 </p>
-Align "Left" argument; Real robot on the left and real-time Rviz2 visualization on the right
+
 
 
 <p align="center">
