@@ -95,7 +95,7 @@ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction
 The aim of this project was implementing a robust method for moving precisely aligned to a certain wall. In particular, it was an extention of the "High level control - 1.c" already implemented during laboratory session (see "turtlebot3_HighLevelControl/turtlebot3_HighLevelControl/highLevelControl_Exercise1c_rewind.py" file). What can be clearly seen testing the standard wall follower (both in simulation and on the real robot) is that during the "Follow wall" state, the robot continuously oscillates trying to move straight. This behaviour was obtained imposing an angular velocity that causes the robot to turn towards the wall, avoiding to go away from it. The non-perfect alignment is due to a basic algorithm to perform the task. In that case, the change of state inside the finite state machine depends on the pre-defined regions' amplitudes, as shown by the following picture.
 
 <p align="center">
-  <img src="github_images/regions.jpg" alt="regions" width="600"/>
+  <img src="github_images/regions.jpg" alt="regions" width="400"/>
 </p>
 
 
@@ -120,7 +120,7 @@ In the following image, the implemented Finite State Machine is shown. The algor
 
 
 <p align="center">
-  <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="300"/>
+  <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="400"/>
 </p>
 
 <p align="center">
