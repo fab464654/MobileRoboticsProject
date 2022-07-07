@@ -9,7 +9,7 @@ cd colcon_ws/
 colcon build && . install/setup.bash
 ```
 
-# _Simulation with Unity_
+### _Simulation with Unity_
 ## _To tune the code (optional):_
 Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
@@ -42,7 +42,7 @@ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction
 ```
 
 
-# _Real Turtlebot3 Burger robot_
+### _Real Turtlebot3 Burger robot_
 
 ## _To tune the code (optional):_
 Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
