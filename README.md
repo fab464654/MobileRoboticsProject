@@ -99,13 +99,18 @@ The aim of this project was implementing a robust method for moving precisely al
 </p>
 
 
-In the following image, the implemented Finite State Machine is shown. The algorithm has the ability to perform alignment towards left or right. Also, when a key is pressed during the execution, the robot will turn by 180° ("Rotate 180°" state) and enter the "Rewind" state. This state makes the robot "going back" re-running a certain number of linear/angular velocities according to the values stored in a deque stack.
+In the following image, the implemented Finite State Machine is shown. The algorithm has the ability to perform alignment with respect to the left or right wall. Also, when a key is pressed during the execution, the robot will turn by 180° ("Rotate 180°" state) and enter the "Rewind" state. This state makes the robot "going back" re-running a certain number of linear/angular velocities according to the values stored in a deque stack.
 <p align="center">
   <img src="github_images/fsm.png" alt="FSM" width="500"/>
 </p>
 
-## _Our solution:_
+Some other problems that arise on the real robot are worth mentioning:
+- the LIDAR readings are not always in the same quantity. In fact, there's some variability on the length of the structure that contains the measured distances.
+- the LIDAR sensor doesn't return 360 values but far less (around 230) each second; moreover the array structure containing the measurements is NOT filled with placeholders that indicate the missing values. This makes the implementation harder, if it relies on regions identified by specific indeces.
+- even if the "arena" that we build to contain the robot is taller than the robot itself, several readings refer to outside the walls. In particular, we suppose that this low-cost sensor points the laser "on an angle" with respect to the ground. In fact, the closest measurements are pretty reliable while the distant ones refer to outside the built arena.
 
+## _Our solution:_
+The main idea 
 #### Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right
 <p align="center">
   <img src="github_images/align_right.gif" alt="Align right" width="400"/>
