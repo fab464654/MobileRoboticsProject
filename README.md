@@ -1,8 +1,15 @@
 # MobileRoboticsProject
 
 ## _How to use it:_
+To run the implemented code:
+- Run Unity and click on the play button (using the "Turtlebot3UnityROS2" map)
+- Run the launch file to start Rviz2:
 ```sh
-ros2 run ...
+$ ros2 launch robust_wall_follower_real robust_wall_follower.launch.py
+```
+- Run the implemented ROS2 node (choosing the desired align_direction left/right):
+```sh
+ros2 run robust_wall_follower_real robust_wall_follower_real --ros-args -p align_direction:=left
 ```
 
 ## _About the problem:_
