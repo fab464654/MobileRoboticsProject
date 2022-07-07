@@ -11,9 +11,9 @@ colcon build && . install/setup.bash
 
 # _Simulation with Unity_
 ## _To tune the code (optional):_
-> Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
+Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
-> _SUGGESTED TUNABLE VALUES FOR SIMULATION:_
+### SUGGESTED TUNABLE VALUES FOR SIMULATION:_
 - distance_threshold = 0.15   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
@@ -25,7 +25,7 @@ colcon build && . install/setup.bash
 - K_P = 1                     # controller P term 
 - align_max_ang_vel = 0.5     # [rad/s] < 1.82! Maximum angular velocity in 'align left/right' state (saturation) 
     
-> Build and source the workspace
+Build and source the workspace
 
 
 ## _How to run it (simulation with Unity):_
@@ -43,9 +43,9 @@ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction
 # _Real Turtlebot3 Burger robot_
 
 ## _To tune the code (optional):_
-> Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
+Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
-> _SUGGESTED TUNABLE VALUES FOR REAL ROBOT:_
+### _SUGGESTED TUNABLE VALUES FOR REAL ROBOT:_
 - distance_threshold = 0.25   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
@@ -57,7 +57,7 @@ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction
 - K_P = 1                     # controller P term 
 - align_max_ang_vel = 0.5     # [rad/s] < 1.82! Maximum angular velocity in 'align left/right' state (saturation) 
     
-> Build and source the workspace
+Build and source the workspace
 
 
 ## _How to run it (real Turtlebot3 bringup):_
