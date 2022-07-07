@@ -13,7 +13,7 @@ colcon build && . install/setup.bash
 ## _To tune the code (optional):_
 Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
-### SUGGESTED TUNABLE VALUES FOR SIMULATION:_
+### _SUGGESTED TUNABLE VALUES FOR SIMULATION:_
 - distance_threshold = 0.15   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
@@ -61,7 +61,23 @@ Build and source the workspace
 
 
 ## _How to run it (real Turtlebot3 bringup):_
+- Modify "~/.bashrc" file specifying the robot ID and type; in our case:
+```sh
+export ROS_DOMAIN_ID=34             #TURTLEBOT3; number on the label on the robot!
+export TURTLEBOT3_MODEL=burger      #"burger" or "waffle_pi" according to which robot you use
+```
+- Source "~/.bashrc" file
+```sh
+source ~/.bashrc
+```
+- Check that ROS_DOMAIN_ID has been set
+```sh
+echo $ROS_DOMAIN_ID 
+```
+
 - Refer to the official website to perform the bringup (https://emanual.robotis.com/docs/en/platform/turtlebot3/bringup/)
+
+
 - Run the launch file to start Rviz2:
 ```sh
 $ ros2 launch robust_wall_follower robust_wall_follower.launch.py
@@ -70,7 +86,6 @@ $ ros2 launch robust_wall_follower robust_wall_follower.launch.py
 ```sh
 ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction:=left
 ```
-
 
 
 ## _About the problem:_
