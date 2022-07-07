@@ -121,11 +121,11 @@ In the following image, the implemented Finite State Machine is shown. The algor
 
 
 <p align="center">
-  <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="600"/>
+  <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="800"/>
 </p>
 
 <p align="center">
-  <img src="github_images/Multiline_plot1.png" alt="Multiline_plot1" width="600"/>
-  <img src="github_images/Multiline_plot2.png" alt="Multiline_plot1" width="600"/>
+  <img src="github_images/Multiline_plot1.png" alt="Multiline_plot1" width="800"/>
+  <img src="github_images/Multiline_plot2.png" alt="Multiline_plot1" width="800"/>
 </p>
 
