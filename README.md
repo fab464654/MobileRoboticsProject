@@ -140,9 +140,8 @@ This project aims at implementing a robust algorithm to perfectly align to the r
 </p>
 
 #### Align "Left" argument; Real robot test from above (2x speed)
-<p align="center">
-  https://user-images.githubusercontent.com/76775232/177984847-fec2f649-9d53-42b8-8d83-3c3308f77faa.mp4
-</p>
+https://user-images.githubusercontent.com/76775232/177984847-fec2f649-9d53-42b8-8d83-3c3308f77faa.mp4
+
 
 <p align="center">
   <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="800"/>
