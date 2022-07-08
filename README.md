@@ -5,8 +5,8 @@
 - Copy the "robust_wall_follower", "turtlebot3_description", "turtlebot3_visualizer" packages in your ROS2 workspace (src folder)
 - Build and source the workspace
 ```sh
-cd colcon_ws/
-colcon build && . install/setup.bash
+$ cd colcon_ws/
+$ colcon build && . install/setup.bash
 ```
 
 ### _Simulation with Unity_
@@ -44,7 +44,7 @@ $ ros2 launch robust_wall_follower robust_wall_follower.launch.py
 ```
 - Run the implemented ROS2 node (choosing the desired align_direction left/right):
 ```sh
-ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction:=left
+$ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction:=left
 ```
 
 ### _Real Turtlebot3 Burger robot_
@@ -71,16 +71,16 @@ Build and source the workspace
 ## _How to run it (real Turtlebot3 bringup):_
 - Modify "~/.bashrc" file specifying the robot ID and type; in our case:
 ```sh
-export ROS_DOMAIN_ID=34             #TURTLEBOT3; number on the label on the robot!
-export TURTLEBOT3_MODEL=burger      #"burger" or "waffle_pi" according to which robot you use
+$ export ROS_DOMAIN_ID=34             #TURTLEBOT3; number on the label on the robot!
+$ export TURTLEBOT3_MODEL=burger      #"burger" or "waffle_pi" according to which robot you use
 ```
 - Source "~/.bashrc" file
 ```sh
-source ~/.bashrc
+$ source ~/.bashrc
 ```
 - Check that ROS_DOMAIN_ID has been set
 ```sh
-echo $ROS_DOMAIN_ID 
+$ echo $ROS_DOMAIN_ID 
 ```
 
 - Refer to the official website to perform the bringup (https://emanual.robotis.com/docs/en/platform/turtlebot3/bringup/)
@@ -92,13 +92,13 @@ $ ros2 launch robust_wall_follower robust_wall_follower.launch.py
 ```
 - Run the implemented ROS2 node (choosing the desired align_direction left/right):
 ```sh
-ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction:=left
+$ ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction:=left
 ```
 
 ## _How to run the LAB implementation (NOT robust) HighLevelControl_Exercise1c_rewind:_
 ```sh
-ros2 launch turtlebot3_HighLevelControl highLevelControl.launch.py
-ros2 run turtlebot3_HighLevelControl turtlebot3_HighLevelControl_Exercise1c_rewind -- right
+$ ros2 launch turtlebot3_HighLevelControl highLevelControl.launch.py
+$ ros2 run turtlebot3_HighLevelControl turtlebot3_HighLevelControl_Exercise1c_rewind -- right
 ```
 
 ## _About the problem:_
