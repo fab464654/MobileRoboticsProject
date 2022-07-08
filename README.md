@@ -140,7 +140,8 @@ This project aims at implementing a robust algorithm to perfectly align to the r
 </p>
 
 #### Align "Left" argument; Real robot test from above (2x speed)
-<center> https://user-images.githubusercontent.com/76775232/177984847-fec2f649-9d53-42b8-8d83-3c3308f77faa.mp4 </center> 
+https://user-images.githubusercontent.com/76775232/177985766-7f591c56-e5a5-4d4e-b149-81ba3bf3fcad.mp4
+
 
 
 <p align="center">
