@@ -27,6 +27,12 @@ Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choos
 - align_max_ang_vel = 0.5     # [rad/s] < 1.82! Maximum angular velocity in 'align left/right' state (saturation) 
 ```
  
+ 
+ 
+ 
+ 
+ 
+ 
 Build and source the workspace
 
 
@@ -40,6 +46,10 @@ $ ros2 launch robust_wall_follower robust_wall_follower.launch.py
 ```sh
 ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction:=left
 ```
+
+
+https://user-images.githubusercontent.com/76775232/177983854-7efcd872-f6ea-48f7-84b2-e8e644db2517.mp4
+
 
 
 ### _Real Turtlebot3 Burger robot_
