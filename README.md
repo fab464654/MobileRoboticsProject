@@ -47,11 +47,6 @@ $ ros2 launch robust_wall_follower robust_wall_follower.launch.py
 ros2 run robust_wall_follower robust_wall_follower --ros-args -p align_direction:=left
 ```
 
-
-https://user-images.githubusercontent.com/76775232/177983854-7efcd872-f6ea-48f7-84b2-e8e644db2517.mp4
-
-
-
 ### _Real Turtlebot3 Burger robot_
 
 ## _To tune the code (optional):_
@@ -129,6 +124,9 @@ This project aims at implementing a robust algorithm to perfectly align to the r
 
 
 
+
+
+
 #### Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right
 <p align="center">
   <img src="github_images/align_right.gif" alt="Align right" width="400"/>
@@ -141,7 +139,10 @@ This project aims at implementing a robust algorithm to perfectly align to the r
   <img src="github_images/align_left_rviz.gif" alt="Align right RVIZ" width="400"/>
 </p>
 
-
+#### Align "Left" argument; Real robot test from above (2x speed)
+<p align="center">
+  https://user-images.githubusercontent.com/76775232/177984847-fec2f649-9d53-42b8-8d83-3c3308f77faa.mp4
+</p>
 
 <p align="center">
   <img src="github_images/lidarReadings_MAP_CENTER.json.png" alt="LIDAR readings" width="800"/>
