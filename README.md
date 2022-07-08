@@ -104,6 +104,22 @@ The aim of this project was implementing a robust method for moving precisely al
   <img src="github_images/robot.gif" alt="turtlebot" width="400"/>
 </p>
 
+### The following videos (2x speed) show several simulations of the "highLevelControl_Exercise1c_rewind" script:
+
+#### _Align "Left" argument; Simulated robot (Rviz2 and Unity visualizations); WITHOUT noise_
+https://user-images.githubusercontent.com/76775232/177986938-8f2c68af-1ee0-4f02-bf9b-f326eca051f2.mp4
+
+#### _Align "Right" argument; Simulated robot (Rviz2 and Unity visualizations); WITHOUT noise_
+https://user-images.githubusercontent.com/76775232/177986966-1fff3134-4cc4-4f27-b1c7-e594bc26a8b7.mp4
+
+#### _Align "Left" argument; Simulated robot (Rviz2 and Unity visualizations); WITH noise_
+https://user-images.githubusercontent.com/76775232/177987377-43f965f5-ff90-473a-923a-62e733dc80b3.mp4
+
+#### _Align "Right" argument; Simulated robot (Rviz2 and Unity visualizations); WITH noise_
+https://user-images.githubusercontent.com/76775232/177987027-ae57e86d-aad5-49d6-8cfa-95cf2768a23c.mp4
+
+
+
 
 In the following image, the implemented Finite State Machine is shown. The algorithm has the ability to perform alignment with respect to the left or right wall. Also, when a key is pressed during the execution, the robot will turn by 180° ("Rotate 180°" state) and enter the "Rewind" state. This state makes the robot "going back" re-running a certain number of linear/angular velocities according to the values stored in a deque stack.
 <p align="center">
