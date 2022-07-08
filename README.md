@@ -138,6 +138,14 @@ This project aims at implementing a robust algorithm to perfectly align to the r
   <img src="github_images/rewind_lab_align_right.gif" alt="rewind LAB align right" width="550"/>
 </p>
 
+RANSAC (RANdom SAmple Consensus) algorithm was used in order to achieve robustness. In particular, it was used during the "Align Left/Right" and "Follow wall" states to find a line that approximates at its best (considering only inlier points) the wall direction. That way, the position control algorithm can make the robot follow the computed line.
+So, once a wall has been found by the robot looking at a 180° front region, RANSAC is applied on the LIDAR readings to find a line that represents the wall's direction. When the turtlebot is aligned with respect to the wall, it switches to the "Follow wall" state. RANSAC is continuosly applied on a small moving region that stays at the right/left of the turtlebot (depending on align left/right respectively). During this state, the position control loop makes sure that the error, defined as the difference between the estimated angular coefficient and zero (representing a vertical line), is kept as low as possible. This way, the robot stays parallel to the wall thanks to a proportional controller that applies a corrective angular velocity, if needed.
+
+Some challenges were found during the implementation:
+- as mentioned before, the number of LIDAR readings isn't constant and they're far less than 360. So, everything worked in simulation but to extract the right distances (corresponding to the right angles) on the real turtlebot, a mapping was needed. The idea was to fill the missing distances through a simple interpolation process, assuming that the number of "lost" readings was uniform across the 360 degrees. So, for example, if the LIDAR array was long 220, we assumed that the 220th distance corresponded to the 360° angle, while the first to the 0°. Then, all the remaining readings were distributed over the 360° and the remaining ones were computed by interpolation. In the end, no matter what the size of the actual array is, the used LIDAR readings structure has 360 values.
+- the LIDAR sensor isn't precise on far measurements and tends to read distances out of the map. This wasn't a big problem because RANSAC considers those points as outliers anyway. To avoid bad visualization on Rviz2, the map's walls were raised though.
+
+
 
 
 
