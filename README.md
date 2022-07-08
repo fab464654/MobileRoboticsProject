@@ -1,5 +1,5 @@
 # MobileRoboticsProject
-
+##### Authors: Michele Sandrini, Fabio Castellini (univr 2021-2022)
 ## _How to install the packages in your ROS2 workspace:_
 - Refer to the official documentation to install ROS2 Foxy (https://docs.ros.org/en/foxy/Installation.html)
 - Copy the "robust_wall_follower", "turtlebot3_description", "turtlebot3_visualizer" packages in your ROS2 workspace (src folder)
