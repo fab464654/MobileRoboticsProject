@@ -107,19 +107,14 @@ The aim of this project was implementing a robust method for moving precisely al
   <img src="github_images/robot.gif" alt="turtlebot" width="400"/>
 </p>
 
-### The following videos (2x speed) show several simulations of the "highLevelControl_Exercise1c_rewind" script:
+### The following videos show several simulations of the "highLevelControl_Exercise1c_rewind" script, comparing noisy and noise free measurements:
 
-#### _Align "Left" argument; Simulated robot (Rviz2 and Unity visualizations); WITHOUT noise_
-https://user-images.githubusercontent.com/76775232/177986938-8f2c68af-1ee0-4f02-bf9b-f326eca051f2.mp4
+#### _Align "Left" argument; Simulation (Rviz2 and Unity visualizations) without/with noise (3x speed)_
+https://user-images.githubusercontent.com/76775232/178109829-b3948288-71c2-43f1-a1f5-8cf35fa70c1b.mp4
 
-#### _Align "Right" argument; Simulated robot (Rviz2 and Unity visualizations); WITHOUT noise_
-https://user-images.githubusercontent.com/76775232/177986966-1fff3134-4cc4-4f27-b1c7-e594bc26a8b7.mp4
+#### _Align "Right" argument; Simulation (Rviz2 and Unity visualizations) without/with noise (3x speed)_
+https://user-images.githubusercontent.com/76775232/178110076-e6d31fc9-e86b-47c1-86b1-3139bc285802.mp4
 
-#### _Align "Left" argument; Simulated robot (Rviz2 and Unity visualizations); WITH noise_
-https://user-images.githubusercontent.com/76775232/177987377-43f965f5-ff90-473a-923a-62e733dc80b3.mp4
-
-#### _Align "Right" argument; Simulated robot (Rviz2 and Unity visualizations); WITH noise_
-https://user-images.githubusercontent.com/76775232/177987027-ae57e86d-aad5-49d6-8cfa-95cf2768a23c.mp4
 
 
 
@@ -174,7 +169,7 @@ Some challenges were found during the implementation:
 
 
 
-#### Align "Left" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)
+#### _Align "Left" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)_
 <!-- Remove to see gifs
 <p align="center">
   <img src="github_images/align_left.gif" alt="Align left" width="400"/>
@@ -183,7 +178,7 @@ Some challenges were found during the implementation:
 -->
 
 
-#### Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)
+#### _Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)_
 <!-- Remove to see gifs
 <p align="center">
   <img src="github_images/align_right.gif" alt="Align right" width="400"/>
@@ -194,23 +189,16 @@ Some challenges were found during the implementation:
 
 
 
-#### Align "Left" argument; Real robot test from above (2x speed)
+#### _Align "Left" argument; Real robot test from above (2x speed)_
 https://user-images.githubusercontent.com/76775232/177985766-7f591c56-e5a5-4d4e-b149-81ba3bf3fcad.mp4
 
-
-### Further comparisons: _simulations of the "HIGH_LEVEL_CONTROL 1.c" with and without adding noise:_
-#### Align "Left" argument; Simulation without/with noise (3x speed)
-https://user-images.githubusercontent.com/76775232/178109829-b3948288-71c2-43f1-a1f5-8cf35fa70c1b.mp4
-
-#### Align "Right" argument; Simulation without/with noise (3x speed)
-https://user-images.githubusercontent.com/76775232/178110076-e6d31fc9-e86b-47c1-86b1-3139bc285802.mp4
 
 
 
 ### Further comparisons: _simulations of the developed ROBUST control with and without adding noise:_
-#### Align "Left" argument; Simulation without/with noise (3x speed)
+#### _Align "Left" argument; Simulation without/with noise (3x speed)_
 https://user-images.githubusercontent.com/76775232/178109214-ddaa892c-1dfb-47c4-b0c1-44e471cc84aa.mp4
 
 
-#### Align "Right" argument; Simulation without/with noise (3x speed)
+#### _Align "Right" argument; Simulation without/with noise (3x speed)_
 https://user-images.githubusercontent.com/76775232/178109204-8cbe44bd-60b1-46ac-ab6f-5b91acd29e35.mp4
