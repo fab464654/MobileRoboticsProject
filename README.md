@@ -10,6 +10,8 @@ $ cd colcon_ws/
 $ colcon build && . install/setup.bash
 ```
 
+
+
 ### _Simulation with Unity_
 ## _To tune the code (optional):_
 Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
@@ -169,22 +171,26 @@ Some challenges were found during the implementation:
 
 
 
-#### _Align "Left" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)_
+#### _Align "Left" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (2x speed)_
 <!-- Remove to see gifs
 <p align="center">
   <img src="github_images/align_left.gif" alt="Align left" width="400"/>
   <img src="github_images/align_left_rviz.gif" alt="Align left RVIZ" width="400"/>
 </p>
 -->
+https://user-images.githubusercontent.com/76775232/178110507-5af13b09-3b93-4497-b180-f88f2876f127.mp4
 
 
-#### _Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)_
+
+#### _Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (2x speed)_
 <!-- Remove to see gifs
 <p align="center">
   <img src="github_images/align_right.gif" alt="Align right" width="400"/>
   <img src="github_images/align_right_rviz.gif" alt="Align right RVIZ" width="400"/>
 </p>
 -->
+https://user-images.githubusercontent.com/76775232/178110512-009e06a4-f820-49fe-97ed-5e45eb9f0be1.mp4
+
 
 
 
