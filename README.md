@@ -21,7 +21,7 @@ Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choos
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
 - focus_angle_half = 25       # [°] angle width of the front region used in 'align left/right' state
 - side_angle = 20             # [°] width of lateral regions 'left' and 'right'  
-- ransac_threshold = 0.01    # distance under which a point gives its consensus to a line 
+- ransac_threshold = 0.01     # distance under which a point gives its consensus to a line 
 - ransac_iterations = 100     # number of iterations of RANSAC algorithm  
 - add_noise = True            # choose whether to add white noise to lidar readings 
 - sigma = 0.005               # standard deviation of the optional added white noise 
