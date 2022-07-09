@@ -177,11 +177,10 @@ Some challenges were found during the implementation:
 #### Align "Left" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)
 <!-- Remove to see gifs
 <p align="center">
-  <img src="github_images/align_left.gif" alt="Align right" width="400"/>
-  <img src="github_images/align_left_rviz.gif" alt="Align right RVIZ" width="400"/>
+  <img src="github_images/align_left.gif" alt="Align left" width="400"/>
+  <img src="github_images/align_left_rviz.gif" alt="Align left RVIZ" width="400"/>
 </p>
 -->
-https://user-images.githubusercontent.com/76775232/178109829-b3948288-71c2-43f1-a1f5-8cf35fa70c1b.mp4
 
 
 #### Align "Right" argument; Real robot on the left and real-time Rviz2 visualization on the right; without/with noise (3x speed)
@@ -191,13 +190,21 @@ https://user-images.githubusercontent.com/76775232/178109829-b3948288-71c2-43f1-
   <img src="github_images/align_right_rviz.gif" alt="Align right RVIZ" width="400"/>
 </p>
 -->
-https://user-images.githubusercontent.com/76775232/178109868-15f7de8b-895e-40a0-bbd9-c4b58aa01832.mp4
 
 
 
 
 #### Align "Left" argument; Real robot test from above (2x speed)
 https://user-images.githubusercontent.com/76775232/177985766-7f591c56-e5a5-4d4e-b149-81ba3bf3fcad.mp4
+
+
+### Further comparisons: _simulations of the "HIGH_LEVEL_CONTROL 1.c" with and without adding noise:_
+#### Align "Left" argument; Simulation without/with noise (3x speed)
+https://user-images.githubusercontent.com/76775232/178109829-b3948288-71c2-43f1-a1f5-8cf35fa70c1b.mp4
+
+#### Align "Right" argument; Simulation without/with noise (3x speed)
+https://user-images.githubusercontent.com/76775232/178110076-e6d31fc9-e86b-47c1-86b1-3139bc285802.mp4
+
 
 
 ### Further comparisons: _simulations of the developed ROBUST control with and without adding noise:_
