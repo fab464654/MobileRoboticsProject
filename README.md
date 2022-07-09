@@ -146,7 +146,7 @@ So, once a wall has been found by the robot looking at a 180° front region, RAN
 _The next image shows a schematic of the position closed control loop:_
 
 <p align="center">
-  <img src="github_images/contolLoop.jpg" alt="control loop" width="550"/>
+  <img src="github_images/controlLoop.jpg" alt="control loop" width="550"/>
 </p>
 
 A "multiline" RANSAC algorithm was also implemented but it wasn't actually used during the tests. This is because we found that using a "single line" estimation algorithm, it intrinsecally chose the best line of the two. Meaning that, in a corner situation, the LIDAR readings can refere to two orthogonal lines. But the robot has always to chose one; so estimating a single line, means estimating the one to which more inliers correspond (of course, if RANSAC is properly tuned with a low threshold parameter!).
