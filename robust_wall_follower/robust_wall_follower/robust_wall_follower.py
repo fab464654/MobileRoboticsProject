@@ -220,12 +220,6 @@ class Turtlebot3RobustWallFollower(Node):
     # loop each 0.1 seconds
     def control_loop(self):
 
-        # Check whether the previous velocity command send to the robot has been executed correctly. If yes, save it
-        """save_vel = abs(self.msg.linear.x - self.lin_vel) < 0.01
-        print("abs(self.msg.linear.x - self.lin_vel) ", abs(self.msg.linear.x - self.lin_vel), "< 0.01")
-        save_vel = save_vel and abs(self.msg.angular.z - self.ang_vel) < 0.01
-        print("abs(self.msg.angular.z - self.ang_vel) ", abs(self.msg.angular.z - self.ang_vel), "< 0.01", end="\n\n")"""
-    
         # callback actions associated to each state
         if self.state_ == 0:
             self.find_wall()
