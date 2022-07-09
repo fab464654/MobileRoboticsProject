@@ -14,26 +14,23 @@ $ colcon build && . install/setup.bash
 Modify "robust_wall_follower/robust_wall_follower/robust_wall_follower.py" choosing:
 
 ### _SUGGESTED TUNABLE VALUES FOR SIMULATION:_
+
+
 ```sh
 - distance_threshold = 0.15   # [m] distance under which the robot detects a wall/obstacle
 - front_angle_half = 80       # [°] half width of front region, used to detect and find walls in the surroundings 
-- focus_angle_half = 20       # [°] angle width of the front region used in 'align left/right' state
+- focus_angle_half = 25       # [°] angle width of the front region used in 'align left/right' state
 - side_angle = 20             # [°] width of lateral regions 'left' and 'right'  
-- ransac_threshold = 0.001    # distance under which a point gives its consensus to a line 
-- ransac_iterations = 200     # number of iterations of RANSAC algorithm  
+- ransac_threshold = 0.01    # distance under which a point gives its consensus to a line 
+- ransac_iterations = 100     # number of iterations of RANSAC algorithm  
 - add_noise = True            # choose whether to add white noise to lidar readings 
 - sigma = 0.005               # standard deviation of the optional added white noise 
 - K_P = 1                     # controller P term 
 - align_max_ang_vel = 0.5     # [rad/s] < 1.82! Maximum angular velocity in 'align left/right' state (saturation) 
 ```
  
+ Build and source the workspace
  
- 
- 
- 
- 
- 
-Build and source the workspace
 
 
 ## _How to run it (simulation with Unity):_
@@ -144,7 +141,13 @@ This project aims at implementing a robust algorithm to perfectly align to the r
 </p>
 
 RANSAC (RANdom SAmple Consensus) algorithm was used in order to achieve robustness. In particular, it was used during the "Align Left/Right" and "Follow wall" states to find a line that approximates at its best (considering only inlier points) the wall direction. That way, the position control algorithm can make the robot follow the computed line.
-So, once a wall has been found by the robot looking at a 180° front region, RANSAC is applied on the LIDAR readings to find a line that represents the wall's direction. When the turtlebot is aligned with respect to the wall, it switches to the "Follow wall" state. RANSAC is continuosly applied on a small moving region that stays at the right/left of the turtlebot (depending on align left/right respectively). During this state, the position control loop makes sure that the error, defined as the difference between the estimated angular coefficient and zero (representing a vertical line), is kept as low as possible. This way, the robot stays parallel to the wall thanks to a proportional controller that applies a corrective angular velocity, if needed.
+So, once a wall has been found by the robot looking at a 180° front region, RANSAC is applied on the LIDAR readings to find a line that represents the wall's direction. When the turtlebot is aligned with respect to the wall, it switches to the "Follow wall" state. RANSAC is continuosly applied on a small moving region that stays at the right/left of the turtlebot (depending on align left/right respectively). During this state, the position control loop makes sure that the error, defined as the difference between the estimated angular coefficient and zero (representing a vertical line), is kept as low as possible. This way, the robot stays parallel to the wall thanks to a proportional controller that applies a corrective angular velocity, if needed. 
+
+_The next image shows a schematic of the position closed control loop:_
+
+<p align="center">
+  <img src="github_images/contolLoop.jpg" alt="control loop" width="550"/>
+</p>
 
 A "multiline" RANSAC algorithm was also implemented but it wasn't actually used during the tests. This is because we found that using a "single line" estimation algorithm, it intrinsecally chose the best line of the two. Meaning that, in a corner situation, the LIDAR readings can refere to two orthogonal lines. But the robot has always to chose one; so estimating a single line, means estimating the one to which more inliers correspond (of course, if RANSAC is properly tuned with a low threshold parameter!).
 As an example, a set of points extracted from the LIDAR structure in a corner situation is shown. The "multiline" RANSAC algorithm was applied and the two estimated lines are returned.
