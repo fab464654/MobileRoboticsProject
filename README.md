@@ -178,7 +178,8 @@ Some challenges were found during the implementation:
   <img src="github_images/align_left_rviz.gif" alt="Align left RVIZ" width="400"/>
 </p>
 -->
-https://user-images.githubusercontent.com/76775232/178110507-5af13b09-3b93-4497-b180-f88f2876f127.mp4
+https://user-images.githubusercontent.com/76775232/178110934-677341ac-f2a7-402c-9aad-6ea1d0808354.mp4
+
 
 
 
@@ -189,7 +190,8 @@ https://user-images.githubusercontent.com/76775232/178110507-5af13b09-3b93-4497-
   <img src="github_images/align_right_rviz.gif" alt="Align right RVIZ" width="400"/>
 </p>
 -->
-https://user-images.githubusercontent.com/76775232/178110512-009e06a4-f820-49fe-97ed-5e45eb9f0be1.mp4
+https://user-images.githubusercontent.com/76775232/178110907-1c9569b1-52c8-4221-aa43-b48097e037ff.mp4
+
 
 
 
