@@ -193,3 +193,10 @@ Some challenges were found during the implementation:
 https://user-images.githubusercontent.com/76775232/177985766-7f591c56-e5a5-4d4e-b149-81ba3bf3fcad.mp4
 
 
+### Further comparison: _simulations of the developed ROBUST control with and without adding noise:_
+#### Align "Left" argument; Simulation with/without noise (3x speed)
+https://user-images.githubusercontent.com/76775232/178109214-ddaa892c-1dfb-47c4-b0c1-44e471cc84aa.mp4
+
+
+#### Align "Right" argument; Simulation with/without noise (3x speed)
+https://user-images.githubusercontent.com/76775232/178109204-8cbe44bd-60b1-46ac-ab6f-5b91acd29e35.mp4
