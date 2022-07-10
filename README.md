@@ -244,8 +244,8 @@ Our solution consists in shrinking the LIDAR range taken into account, consideri
 
 + **follow wall**: when robot is following a wall, according to the align direction chosen by user, we can assume a priori that the wall to align with, is relatively either on the right (270° in LIDAR ref. frame) or on the left (90° in LIDAR ref. frame). And so, assuming this angles/indeces, as center of the region and knowing the parameter `focus_angle_half` specifying half width of the angle, the region is defined as:
 
-  + align left: `[270-\text{focus\_angle\_half}, 270+\text{focus\_angle\_half}]`
-  + align right: `[90-\text{focus\_angle\_half}, 90+\text{focus\_angle\_half}]`
+  + align left: `[270-focus_angle_half, 270+focus_angle_half]`
+  + align right: `[90-focus_angle_half}, 90+focus_angle_half]`
 
 + **align left/right**: in this state, the assumption that wall is localized in a specific direction of the lidar, does not hold anymore. The solution found, consists in using a so called **_movable focus region_**. This has still a width of 2*`focus_angle_half` but _its main feature and difference from other regions, is that it is movable_, in the sense that it does not cover a specific fixed fraction of LIDAR (like in case above, since `focus_angle_half` is constant non varying parameter). Its aim indeed, is to always point toward the same wall, regardless of robot motion. In this way, the points extracted are always relative to the same wall, such that robot do not "lose its focus" on its goal of aligning to _that specific_ wall. 
 
@@ -281,7 +281,7 @@ To explain this concept, let's start from the initial **find wall** state. At a 
    delta_theta = current robot angle - self.angle_init
    ```
 
-    that should be expressed in degrees, and rounded to integer value
+   that should be expressed in degrees, and rounded to integer value
 
 3) Knowing starting wall direction as LIDAR index and the angular displacement since the start of the align motion, then can be computed the _current wall direction_, _expressed as index in LIDAR reference frame_, which is
 
