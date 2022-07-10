@@ -292,7 +292,7 @@ To explain this concept, let's start from the initial **find wall** state. At a 
 
    finally restricted in range $[0, 360]$
 
-4. `wall_dir_idx_in_lidar` is the center of the _movable focus region_, that ranges from $\text{wall\_dir\_idx\_in\_lidar}-\text{focus\_angle\_half}$ to $ \text{wall\_dir\_idx\_in\_lidar}+\text{focus\_angle\_half}$
+4. `wall_dir_idx_in_lidar` is the center of the _movable focus region_, that ranges from `wall_dir_idx_in_lidar - focus_angle_half` to `wall_dir_idx_in_lidar + focus_angle_half`
 
    
 
