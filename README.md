@@ -245,13 +245,13 @@ Our solution consists in shrinking the LIDAR range taken into account, consideri
 + **follow wall**: when robot is following a wall, according to the align direction chosen by user, we can assume a priori that the wall to align with, is relatively either on the right (270° in LIDAR ref. frame) or on the left (90° in LIDAR ref. frame). And so, assuming this angles/indeces, as center of the region and knowing the parameter `focus_angle_half` specifying half width of the angle, the region is defined as:
 
   + align left: `[270-focus_angle_half, 270+focus_angle_half]`
-  + align right: `[90-focus_angle_half}, 90+focus_angle_half]`
+  + align right: `[90-focus_angle_half, 90+focus_angle_half]`
 
 + **align left/right**: in this state, the assumption that wall is localized in a specific direction of the lidar, does not hold anymore. The solution found, consists in using a so called **_movable focus region_**. This has still a width of 2*`focus_angle_half` but _its main feature and difference from other regions, is that it is movable_, in the sense that it does not cover a specific fixed fraction of LIDAR (like in case above, since `focus_angle_half` is constant non varying parameter). Its aim indeed, is to always point toward the same wall, regardless of robot motion. In this way, the points extracted are always relative to the same wall, such that robot do not "lose its focus" on its goal of aligning to _that specific_ wall. 
 
 <p align="center">
   <img src="github_images/movable_focus_region.gif" alt="movable focus region" width="400"/>
-  Focus on green points which belong to the movable focus region
+  <figcaption> Focus on green points which belong to the movable focus region </figcaption> 
 </p>
 
 
