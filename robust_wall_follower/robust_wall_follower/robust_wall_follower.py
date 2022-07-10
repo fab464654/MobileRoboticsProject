@@ -662,7 +662,7 @@ class Turtlebot3RobustWallFollower(Node):
     #                               and it is the center of the region;
     # - self.focus_angle_half:      is the half width in degrees/indeces of the region, chosen bu the user
     #
-    def get_focus_region_indeces(self):
+    def get_movable_focus_region_indeces(self):
         delta_theta = round(np.rad2deg(self.theta - self.angle_init))
 
         # The direction in the current robot coordinate frame, toward which the wall is
@@ -691,7 +691,7 @@ class Turtlebot3RobustWallFollower(Node):
     def align_left(self):
         
         # Compute and return the indeces of the CURRENT "movable focus region"
-        indeces = self.get_focus_region_indeces()
+        indeces = self.get_movable_focus_region_indeces()
 
         
         # Input for RANSAC algorithm
@@ -737,7 +737,7 @@ class Turtlebot3RobustWallFollower(Node):
     # action to rotate aligning with the wall on the robot LEFT
     def align_right(self):
         
-        indeces = self.get_focus_region_indeces()
+        indeces = self.get_movable_focus_region_indeces()
 
         
         # Input for RANSAC algorithm
