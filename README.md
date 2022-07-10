@@ -251,9 +251,10 @@ Our solution consists in shrinking the LIDAR range taken into account, consideri
 
 <p align="center">
   <img src="github_images/movable_focus_region.gif" alt="movable focus region" width="400"/>
-  <figcaption> Focus on green points which belong to the movable focus region </figcaption> 
 </p>
-
+<p align="center">
+ Focus on green points which belong to the movable focus region
+</p>
 
 
 
