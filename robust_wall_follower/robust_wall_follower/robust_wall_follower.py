@@ -73,10 +73,11 @@ class Turtlebot3RobustWallFollower(Node):
 
         #initialization dict of lidar regions
         self.regions = {
-            'front': 0.0,       
-            'narrow_front': 0.0,   # movable sector of lidar, from which input points for RANSAC are extracted
-            'left': 0.0,
-            'right': 0.0,
+            'front': 0.0,           # wide frontal region, used to detect wall only in 'find wall' state  (fixed, solidal to LIDAR/robot frame)
+            'narrow_front': 0.0,    # narrow frontal region, used to detect obatsacles/walls, in all states (except 'find wall') (fixed, solidal to LIDAR/robot frame)
+            'left': 0.0,            # left region (fixed, solidal to LIDAR/robot frame)
+            'right': 0.0,           # right region (fixed, solidal to LIDAR/robot frame)
+            'movable_focus': 0.0   # movable sector of lidar, from which input points for RANSAC are extracted (movable, NOT solidal to LIDAR/robot frame)
         }
 
         # Initialization of dict storing the indeces of the min lidar readings in the relative region
@@ -180,7 +181,8 @@ class Turtlebot3RobustWallFollower(Node):
     
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Method for listening to the keyboard
+    # Method for listening to the keyboard, to trigger state 'rotate 180 deg' and then 'rewind'
+    # when user press key 'r' on the keyboard (NOTICE: also if the terminal is not currently selelcted!)
     def press_callback(self,key): # PAY ATTENTION TO THE PARAMETERS ORDER!!!
         if key==keyboard.KeyCode.from_char('r'):
             if self.state_!=4:
@@ -193,6 +195,10 @@ class Turtlebot3RobustWallFollower(Node):
                 print("                     (keyboard listener restarts after it finishes)\n")
         else:
             print("<keyboard listener>: only allowed char is 'r', to start/stop <rewind> procedure!\n")
+    # END press_callback()
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     
     # To read from robot odometry the actual current robot orientation (self.theta)
     def odom_callback(self,msg):
@@ -217,10 +223,10 @@ class Turtlebot3RobustWallFollower(Node):
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # loop each 0.1 seconds
+    # control loop, executed each 0.1 seconds
     def control_loop(self):
-
-        # callback actions associated to each state
+    
+        # actions for states 
         if self.state_ == 0:
             self.find_wall()
         elif self.state_ == 1:
@@ -246,10 +252,11 @@ class Turtlebot3RobustWallFollower(Node):
         # To publish a string representing the current state to topic '/current_state' subscripted by Rviz
         self.publish_current_state_marker()
 
+        # Represent the line in RViz2, only in those states where actually a line is estimated
         if self.state_ in [1,2,3]:
             self.pub_line_marker()
         
-        # If necessary, saturate velocities if they exceed limits
+        # Saturate velocity if necessary
         if abs(self.msg.linear.x)>1: # m/s
             self.msg.linear.x = 1 * np.sign(self.msg.linear.x)
             warn("ATTENTION: linear velocity along x, {:.2f} m/s, was too high so it has been saturated to 1 m/s!")
@@ -257,16 +264,17 @@ class Turtlebot3RobustWallFollower(Node):
             self.msg.angular.z = 1.82 * np.sign(self.msg.angular.z)
             warn("ATTENTION: angular velocity around z, {:.2f} rad/s, was too high so it has been saturated to 1.82 m/s!")
 
+        # Send to robot the velocity command for the current control loop iteration
         self.publisher_.publish(self.msg)
 
-        # FOR DEBUGGING:
+        # SHOW IN TERMINAL MOST IMPORTANT PARAMETERS:
         # 0: 'find the wall', 1: 'align left', 2: 'follow wall', 3: 'align right', 4: 'rotate 180 deg', 5: 'rewind'
         print("State: <{:s}>".format(self.state_dict_[self.state_]) )
-        print("    Lidar (min): front[{:4d},{:4d}]: {:>5.3g} [m] -> argmin: {:3d}, focus_view[{:>4s},{:>4s}]: {:s} [m] -> argmin: {:>3s}".format(
+        print("    Lidar (min): front[{:4d},{:4d}]: {:>5.3g} [m] -> argmin: {:3d}, movable_focus[{:>4s},{:>4s}]: {:s} [m] -> argmin: {:>3s}".format(
             -self.front_angle_half, self.front_angle_half, self.regions['front'], self.argmin_regions['front'],
             str(self.wall_dir_idx_in_lidar-self.focus_angle_half) if self.state_ in [1,2,3] else str(None),
             str(self.wall_dir_idx_in_lidar+self.focus_angle_half) if self.state_ in [1,2,3] else str(None),
-            str(round(self.regions['narrow_front'],3)) if self.state_ in [1,2,3] else str(None),
+            str(round(self.regions['movable_focus'],3)) if self.state_ in [1,2,3] else str(None),
             str(int(self.argmin_regions['narrow_front'])) if self.state_ in [1,2,3] else str(None) ) )
         print("    Left[{:4d},{:4d}]: {:>6.3g} [m], Right[{:4d},{:4d}]: {:>6.3g} [m].      Odometry: orientation: {:>3d}° (={:>7.5g} rad)".format(
             self.front_angle_half, self.front_angle_half+self.side_angle, self.regions['left'],
@@ -275,16 +283,21 @@ class Turtlebot3RobustWallFollower(Node):
         print("    Velocity (Twist): lin. v.: {:>5.2g} [m/s], ang. v.: {:>5.2g} [rad/s] , num. vel. msgs saved in STACK: {:4d}/{:d}".format(self.msg.linear.x, self.msg.angular.z, len(self.vel_stack), self.vel_stack.maxlen ) )
         print("    Line angular coefficient m: {:>8s},   wall_direction: {:>3s},  len(original_lidar): {:4d}, len(self.ranges): {:4d}".format(
             str(round(self.wall_line.m,5)) if isinstance(self.wall_line.m, float) else str(self.wall_line.m), str(self.wall_dir_idx_in_lidar), len(self.original_scan.ranges.tolist()), len(self.ranges) ), end="\n\n" )
-
     # END control_loop()
     
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Method used to initialize values related to 'movable_focus' region, the region used to extract
+    # points from a wall, that will become input for RANSAC algorithm.
+    # Since 'movable_focus' region is used only in states 'align left/right' and 'follow wall'
+    # (since they are the only states which estimate a wall line with RANSAC), in other states, these
+    # parameters are initialized to "empty" values, to indicate that this region is currently unused
     def reset_focus_view(self):
         self.index_init = None
         self.wall_dir_idx_in_lidar = None
         self.regions['narrow_front'] = None
-        self.argmin_regions['focus view'] = None
+        self.argmin_regions['narrow_front'] = None
+        self.regions['movable_focus'] = None
         self.wall_line.reset()
         self.pub_line_marker()
 
@@ -293,6 +306,8 @@ class Turtlebot3RobustWallFollower(Node):
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Method used to publish in topic '/current_state', a STRING representing the robot current
+    # state in FSM. Used to visualize in RViz2 the current robot state
     def publish_current_state_marker(self):
         msg = Marker()
         msg.header.frame_id = "/base_footprint"
@@ -397,6 +412,8 @@ class Turtlebot3RobustWallFollower(Node):
     
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Method tused to publish the points used as input for RANSAC algorithm to extract regressor line from poits.
+    # Used to show in RViz2 these points
     def pub_ransac_lidar_indeces(self, idxs, lidar_dists):
 
         # Publish noisy / normal lidar ranges
@@ -422,9 +439,6 @@ class Turtlebot3RobustWallFollower(Node):
                 msg.intensities[i] = 0.0
 
         self.ransac_lidar_view_pub.publish(msg)
-
-
-
     # END pub_ransac_lidar_indeces()
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -520,20 +534,13 @@ class Turtlebot3RobustWallFollower(Node):
 
         # Publish the Marker
         self.line_visualization_pub.publish(marker)
-
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    # Method to publish Line Marker to topic '/line_visualization', to visualize the resulting
-    # line extracted from RANSAC in Rviz2
-    def pub_turtlebot_path(self):
-        pass
+    # END pub_line_marker
         
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # This method implements the EDGES of the FSM (Finite States Machine)
     def take_action(self):
-        # This method implements the EDGES of the FSM (Finite States Machine)
 
         # 0: 'find the wall', 1: 'align left', 2: 'follow wall', 3: 'align right', 4: 'rotate 180 deg', 5: 'rewind'
 
@@ -599,8 +606,7 @@ class Turtlebot3RobustWallFollower(Node):
         
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # function to update state
-    # don't modify the function
+    # function to update state (called for every FSM state transition)
     def change_state(self, state):
 
         previous_state = self.state_
@@ -631,7 +637,7 @@ class Turtlebot3RobustWallFollower(Node):
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # action to find the wall, move forward and wall side to find the wall
+    # action to find the wall
     def find_wall(self):
 
         # write velocity commands using the class variable self.msg
@@ -645,8 +651,18 @@ class Turtlebot3RobustWallFollower(Node):
         
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # action to torn left, move forward and left side
-    def align_left(self):
+    # This function computes the so called "movable focus region", i.e. the region
+    # in LIDAR, from which the input points given in input to RANSAC are extracted,
+    # and from which the best regressor line should be estimated
+    #
+    # This region is tdefined as:
+    #  [self.wall_dir_idx_in_lidar + self.focus_angle_half - self.focus_angle_half, self.wall_dir_idx_in_lidar + self.focus_angle_half]
+    # where:
+    # - self.wall_dir_idx_in_lidar: is an index in [0,360), indicating the approximative direction of the wall, in LIDAR frame,
+    #                               and it is the center of the region;
+    # - self.focus_angle_half:      is the half width in degrees/indeces of the region, chosen bu the user
+    #
+    def get_focus_region_indeces(self):
         delta_theta = round(np.rad2deg(self.theta - self.angle_init))
 
         # The direction in the current robot coordinate frame, toward which the wall is
@@ -663,17 +679,32 @@ class Turtlebot3RobustWallFollower(Node):
         indeces = list(range(minIndex,maxIndex+1))
         indeces = orderLaserScanSectionIndeces(indeces)
 
+        # Get and store current minimum distance in 'movable focus' region
+        self.regions['movable_focus'] = min(np.array(self.scan.ranges)[indeces])
+
+        return indeces
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+    # action to rotate aligning with the wall on the robot RIGHT
+    def align_left(self):
         
-        # Run RANSAC algorithm
+        # Compute and return the indeces of the CURRENT "movable focus region"
+        indeces = self.get_focus_region_indeces()
+
+        
+        # Input for RANSAC algorithm
         pointsForRansac = np.array(self.ranges)[indeces]
         anglesForRansac = np.array(indeces)
 
-        # To test WITH noise
-        #inliers_1, outliers_1, self.m, q_best_1, lidar_measurements = ransac(self.threshold, self.iterations, pointsForRansac, anglesForRansac, self.add_noise, self.sigma)
+        # Find with RANSAC the regressor LINE, among points in POLAR coordinate (pointsForRansac,anglesForRansac) = ( ρ_i, θ_i ) i=0,...,N
         self.wall_line.find_with_ransac(pointsForRansac,anglesForRansac)
 
         # Send to topic and to Rviz, the LaserPoints of the lidar section used for RANSAC
         self.pub_ransac_lidar_indeces(indeces, self.wall_line.lidarInputPoints)
+
+        # USE THE LINE JUST FOUND TO COMPUTE THE INPUT COMMAND FOR THE ROBOT:
 
         # Use proportional controller only when 'self.wall_dir_idx_in_lidar' is in range [200,340]
         # (this means wall is on robot right). Otherwise use a constant counter-clockwise ang. vel.
@@ -703,35 +734,23 @@ class Turtlebot3RobustWallFollower(Node):
             
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     
-    # action to torn right, move forward and right side
+    # action to rotate aligning with the wall on the robot LEFT
     def align_right(self):
-        delta_theta = round(np.rad2deg(self.theta - self.angle_init))
-
-        # The direction in the current robot coordinate frame, toward which the wall is
-        self.wall_dir_idx_in_lidar = int((360 + (self.index_init - delta_theta)) % 360)
         
-        # Around the "self.wall_dir_idx_in_lidar"
-        # [self.wall_dir_idx_in_lidar - self.focus_angle_half, self.wall_dir_idx_in_lidar + self.focus_angle_half]
-        limit1 = self.wall_dir_idx_in_lidar - self.focus_angle_half
-        limit2 = self.wall_dir_idx_in_lidar + self.focus_angle_half
-
-        minIndex = min(limit1, limit2)
-        maxIndex = max(limit1, limit2)
-
-        indeces = list(range(minIndex,maxIndex+1))
-        indeces = orderLaserScanSectionIndeces(indeces)
+        indeces = self.get_focus_region_indeces()
 
         
-        # Run RANSAC algorithm
+        # Input for RANSAC algorithm
         pointsForRansac = np.array(self.ranges)[indeces]
         anglesForRansac = np.array(indeces)
 
-        # To test WITH noise
-        #inliers_1, outliers_1, self.m, q_best_1, lidar_measurements = ransac(self.threshold, self.iterations, pointsForRansac, anglesForRansac, self.add_noise, self.sigma)
+        # Find with RANSAC the regressor LINE, among points in POLAR coordinate (pointsForRansac,anglesForRansac) = ( ρ_i, θ_i ) i=0,...,N
         self.wall_line.find_with_ransac(pointsForRansac,anglesForRansac)
 
         # Send to topic '/ransac_lidar_view' and to Rviz, the LaserPoints of the lidar section used for RANSAC
         self.pub_ransac_lidar_indeces(indeces, self.wall_line.lidarInputPoints)
+
+        # USE THE LINE JUST FOUND TO COMPUTE THE INPUT COMMAND FOR THE ROBOT:
 
         # Use proportional controller only when 'self.wall_dir_idx_in_lidar' is in range [20,160]
         # (this means wall is on robot left). Otherwise use a constant clockwise ang. vel.
@@ -755,14 +774,13 @@ class Turtlebot3RobustWallFollower(Node):
             self.msg.angular.z = - self.align_max_ang_vel
         
         # Saturate velocity if necessary
-        # If necessary, saturate velocities if they exceed limits
         if abs(self.msg.angular.z)>self.align_max_ang_vel: #rad/s
             self.msg.angular.z = + self.align_max_ang_vel * np.sign(self.msg.angular.z)
     # END align_right()
             
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     
-    # action to follow the wall, move forward 
+    # action to follow the wall, moving forward, but always looking at the wall nearby, using RANSAC to stay aligned
     def follow_the_wall(self):
         if self.turn_left:
             indeces = list(range(270-self.focus_angle_half, 270+self.focus_angle_half))
@@ -770,11 +788,11 @@ class Turtlebot3RobustWallFollower(Node):
             indeces = list(range(90-self.focus_angle_half, 90+self.focus_angle_half))
         indeces = [((360+ind)%360) for ind in indeces]
         
-        # Run RANSAC algorithm
+        # Input for RANSAC algorithm
         pointsForRansac = np.array(self.ranges)[indeces]
         anglesForRansac = np.array(indeces)
 
-        # To test WITH noise
+        # Run RANSAC algorithm to find the regressor LINE between POLAR points (pointsForRansac, anglesForRansac) = ( ρ_i, θ_i ) i=0,...,N
         self.wall_line.find_with_ransac(pointsForRansac, anglesForRansac)
 
         # Send to topic '/ransac_lidar_view' and to Rviz, the LaserPoints of the lidar section used for RANSAC
@@ -800,6 +818,7 @@ class Turtlebot3RobustWallFollower(Node):
             
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Intermediate procedure called before and after 'rewind' state. Robot has to rotate of 180°
     def rotate180deg(self):
         # TO DO
         self.msg.linear.x = 0.0 #m/s
@@ -823,6 +842,8 @@ class Turtlebot3RobustWallFollower(Node):
     
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # 'rewind' state procedure. The past velocity command has been saved in a satck and now, are re-executed in inverse order,
+    # to repeat past actions
     def rewind(self):
         # Check for collisions. If so, stop the robot, and interrupt execution
         # (the value is different for simulation an real robot)
@@ -845,6 +866,7 @@ class Turtlebot3RobustWallFollower(Node):
     
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Simple method used to stop robot, when ROS node is closed ()
     def stop_robot(self): # Fabio/Michele adding: to stop the robot when user press CTRL+C SIGTERM
         self.msg.linear.x = 0.0
         self.msg.angular.z = 0.0
